@@ -101,12 +101,12 @@ void insert_station_after(struct station *node, struct station *new_node)
 struct station* read_stations()
 {	
 	// reads the file bloor_line.txt, converts each line into a doubly-linked list of stations
-	FILE* fop = fopen("bloor_line.txt", "r");
-	int pos, i = 0;
 	char* name;
+	int pos, i = 0;
 	struct station* prev = NULL;
 	struct station* new_station = NULL;
 	struct station* first;
+	FILE* fop = fopen("bloor_line.txt", "r");
 	
 	while (fscanf(fop, "%s %d\n", name, &pos) != EOF)
 	{
@@ -205,7 +205,7 @@ void remove_all_stations(struct station **first)
 {
 	// removes and frees the memory of all the stations in the linked list beginning with first.
 	struct station* curr_station = *first;
-    struct passenger** curr_passenger;
+    struct passenger* curr_passenger;
 
     // looping through stations:
     while (curr_station -> next != NULL)
@@ -213,8 +213,8 @@ void remove_all_stations(struct station **first)
         free(curr_station -> name);
 
         // freeing the passenger list by calling clear_passenger_list
-        *curr_passenger = curr_station -> passengers;
-        clear_passenger_list(curr_passenger);
+        curr_passenger = curr_station -> passengers;
+        clear_passenger_list(&curr_passenger);
 
         // freeing the statoin itself
         curr_station = curr_station -> next;
