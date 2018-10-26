@@ -73,4 +73,3 @@ double average_wait_time(struct station *first);
 struct station* get_station_at_pos(int position, struct station *first);
 void remove_all_stations(struct station **first);
 
-
