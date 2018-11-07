@@ -1,8 +1,7 @@
 // station.c -- simulates a doubly-linked list of TTC stations
 // Farhang Tarlan, winter 2013
 #include "ttc.h"
-int MAX_SIZE = 20;
-
+#define MAX_SIZE 20
 
 struct station* make_station(char *name, int pos)
 {
