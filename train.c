@@ -5,7 +5,7 @@
 
 struct train* make_train(int iden, int position)
 {
-	// creates a new train node with the given id (iden) and position on the track (position)
+	// creates and returns a new train node with the given id (iden) and position on the track (position) using malloc.
 	struct train* new_train = (struct train*) malloc(sizeof(struct train*));
 	new_train -> id = iden;
 	new_train -> pos = position;
@@ -15,8 +15,10 @@ struct train* make_train(int iden, int position)
 
 int contains_train_id(struct train *first, int value)
 {	
-	// returns 1 if the linked list pointed to by first has a train node with an id == value. 0 otherwise
+	// returns 1 if the linked list pointed to by first has a train node with id == value. 0 otherwise
 	struct train* curr;
+	
+	// looping through the linked list, returning 1 if a node has id equal to value
 	for (curr = first; curr != NULL; curr = curr -> next)
 	{
 		if (curr -> id == value)
@@ -50,12 +52,14 @@ void prepend_train(struct train **first, struct train *new_node)
 	
 	struct train* curr = *first;
 	
+	// asserting that the position of new_node is smaller than that of any train in the linked list
 	while (curr)
 	{
 		assert (new_node -> pos < curr -> pos);
 		curr = curr -> next;
 	}
 	
+	// asserting that no train in the linked list contrains id == new_node -> id
 	assert (contains_train_id(*first, new_node -> id) == 0);
 	
 	new_node -> next = *first;
@@ -77,6 +81,7 @@ void print_train(struct train *node)
 
 void print_trains(struct train *first)
 {
+	// prints the entire linked list pointed to by first to the terminal.
 	struct train* curr = first;
 	
 	printf("---------- The trains ---------- \n");
@@ -90,9 +95,11 @@ void print_trains(struct train *first)
 
 int can_advance(struct train *current, int passengers_on_platform)
 {
-	// returns whether a train can safely advance 
-	// for a train to advance, the next train on the track must be more than one position unit ahead on the track, 
-	// and there must be no passengers on the platform.
+	/*
+	returns whether a train can safely advance 
+	for a train to advance, the next train on the track must be more than one position unit ahead on the track, 
+	 and there must be no passengers on the platform.
+	*/
 	assert (current);
 	assert (passengers_on_platform >= 0);
 	
@@ -141,6 +148,7 @@ double avg_train_dist(struct train *first)
 	double dist = 0.0;
 	int num = 0;
 	
+	// looping through the linked list stopping at the second last node
 	while (curr -> next)
 	{
 		dist += (curr -> next -> pos - curr -> pos - 1);
@@ -154,8 +162,7 @@ double avg_train_dist(struct train *first)
 
 void remove_train_after(struct train *node)
 {
-	// removes the node directly after the given train node (node)
-	// this preserves the rest of the linked list and frees the memory of the removed node.
+	// removes the node directly after the given train node (node). Frees the memory of the removed node
 	assert (node);
 	
 	struct train* temp = node -> next;
@@ -170,6 +177,7 @@ void clear_all_trains(struct train **first)
 	{
 		remove_train_after(*first);
 	}
-	
+	struct train* temp = *first;
+	free(temp);
 	*first = NULL;
 }

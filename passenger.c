@@ -5,7 +5,7 @@
 
 struct passenger* make_passenger()
 {
-	// creates a new passenger node. Sets the waiting time to 0 and the next to to NULL
+	// creates a new passenger node using malloc. Sets the waiting time to 0 and the next to to NULL
 	struct passenger* new_passenger = (struct passenger*) malloc(sizeof(struct passenger*));
 	new_passenger -> waiting = 0;
 	new_passenger -> next = NULL;
@@ -39,13 +39,14 @@ void print_passenger(struct passenger *node)
 
 void print_passenger_list(struct passenger *first)
 {
-	// prints the entire passenger linked list pointed to by first to the terminal
+	// prints the entire passenger linked list pointed to by first
+	struct passenger* curr = first;
 	printf("Waiting times: \n");
 	
-	while (first)
+	while (curr)
 	{
-		print_passenger(first);
-		first = first -> next;
+		print_passenger(curr);
+		curr = curr -> next;
 	}
 }
 
@@ -68,33 +69,36 @@ void clear_passenger_list(struct passenger **first)
 		remove_first_passenger(first);
 	}
 	
-	//free(first);
+	*first = NULL;
 }
 
 void increment_passenger_list(struct passenger *first)
 {
-	// increments the waiting time of all the passenger nodes by one minute in the linked list pointed to by first
-	while (first)
+	// increments the waiting time of all the passengers in the linked list pointed to by first by one minute
+	struct passenger* curr = first; 
+	
+	while (curr)
 	{
-		first -> waiting += 1;
-		first = first -> next;
+		curr -> waiting += 1;
+		curr = curr -> next;
 	}
 }
 
 double average_passenger_list(struct passenger *first)
 {
-	// returns the average waiting time of the passenger nodes in the linked list pointed to by first
+	// returns the average waiting time of the passengers in the linked list pointed to by first
 	if (first == NULL)
 		return -1;
 	
 	int num = 0;
 	double avg = 0.0;
+	struct passenger* curr = first;
 	
-	while (first)
+	while (curr)
 	{
 		num += 1;
-		avg += first -> waiting;
-		first = first -> next;
+		avg += curr -> waiting;
+		curr = curr -> next;
 	}
 	
 	return avg/num;
@@ -104,13 +108,13 @@ int num_passengers(struct passenger *first)
 {
 	// returns the number of passenger nodes in the linked list pointed to by first
 	int num = 0;
+	struct passenger* curr = first;
 	
-	while (first)
+	while (curr)
 	{
 		num += 1;
-		first = first -> next;
+		curr = curr -> next;
 	}
 	
 	return num;
 }
-
