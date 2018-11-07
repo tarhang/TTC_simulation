@@ -7,6 +7,7 @@ int main()
 	insert_station_after(spadina, make_station("Bay", 1));
 	insert_station_after(spadina, make_station("StGeorge", 1));
 	print_stations(spadina);
+			
 	// should print:
 	/*
 		The stations: 
@@ -17,8 +18,9 @@ int main()
 	*/
 
 	// Test 2. Read stations in from bloor_line.txt
-	struct station *kipling = read_stations();
+	struct station *kipling = read_stations();	
 	print_stations(kipling);
+
 	/* should print:
 		The stations: 
 				 Kipling (0)-> Islington     
@@ -54,44 +56,44 @@ int main()
 		       Warden -> Kennedy (0)
 	*/
 
-	// Test 3. Append passenger
-//	add_passenger(spadina);
-//	print_stations(spadina); // Spadina should now have a passenger
-//	add_passenger(spadina);
-//	add_passenger(spadina->next);
-//	print_stations(spadina); // Spadina should have 2 passengers; St George 1; Bay 0
-//	increment_passenger_list(spadina->passengers);
 
+	// Test 3. Append passenger
+	add_passenger(spadina);
+	print_stations(spadina); // Spadina should now have a passenger
+	add_passenger(spadina);
+	add_passenger(spadina->next);
+	print_stations(spadina); // Spadina should have 2 passengers; St George 1; Bay 0
+	increment_passenger_list(spadina->passengers);
 
 	// Test 4. Add n many passengers
-//	add_n_passengers(spadina->next->next, 5);
-//	add_n_passengers(spadina, 0);
-//	add_n_passengers(spadina->next, -5);
-//	print_stations(spadina); // Spadina should have 2 passengers; St George 1; Bay 5
+	add_n_passengers(spadina->next->next, 5);
+	add_n_passengers(spadina, 0);
+	add_n_passengers(spadina->next, -5);
+	print_stations(spadina); // Spadina should have 2 passengers; St George 1; Bay 5
 
 	// Test 5. Number of passengers waiting at a station.
-//	printf("%d\n", total_passengers(spadina) ); // should be 8
-//	printf("%d\n", total_passengers(kipling) ); // should be 0
-//	printf("%d\n", total_passengers(NULL) ); // should be 0
+	printf("%d\n", total_passengers(spadina) ); // should be 8
+	printf("%d\n", total_passengers(kipling) ); // should be 0
+	printf("%d\n", total_passengers(NULL) ); // should be 0
 
 	// Test 6. Average wait time over the entire TTC.
-//	increment_passenger_list(spadina->passengers);
-	// print_passenger_list(spadina->passengers);
-	// print_passenger_list(spadina->next->passengers);
-	// print_passenger_list(spadina->next->next->passengers);
-//	printf("%lf\n", average_wait_time(spadina) ); // should be 0.500000
-//	printf("%lf\n", average_wait_time(kipling) ); // should be -nan
-//	printf("%lf\n", average_wait_time(NULL) ); // should be -nan
+	increment_passenger_list(spadina->passengers);
+	print_passenger_list(spadina->passengers);
+	print_passenger_list(spadina->next->passengers);
+	print_passenger_list(spadina->next->next->passengers);
+	printf("%lf\n", average_wait_time(spadina) ); // should be 0.500000
+	printf("%lf\n", average_wait_time(kipling) ); // should be -nan
+	printf("%lf\n", average_wait_time(NULL) ); // should be -nan
 
 	// Test 7. Station at position
-//	print_station( get_station_at_pos(42, kipling) ); // should be Yonge
-//	assert( !get_station_at_pos(43, kipling) ); // should be NULL
+	print_station( get_station_at_pos(42, kipling) ); // should be Yonge
+	assert( !get_station_at_pos(43, kipling) ); // should be NULL
 
 	// Test 8. Remove all stations
-//	remove_all_stations(&kipling); 
-//	print_stations(kipling); // prints only "The stations:"
-//	remove_all_stations(&spadina); 
-//	print_stations(spadina); // prints only "The stations:"
+	remove_all_stations(&kipling); 
+	print_stations(kipling); // prints only "The stations:"
+	remove_all_stations(&spadina); 
+	print_stations(spadina); // prints only "The stations:"
 
 	return 0;
 }
