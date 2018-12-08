@@ -20,5 +20,4 @@ git clone https://github.com/tarhang/TTC_simulation.git
 * `Makefile` - contains the command-line compilation instructions to test the code. There are three compilations in the file:
   * type `make passenger` in the command-line to create an executable file to test the methods in `passengers.c`. This creates an executable file name 'passenger'. Run the executable by `./passenger` in the command-line.
   * type `make train` in the command-line to create an executable file to test the methods in `trains.c`. The executable is then run by the command-line instruction `./train`.
-  type `make station` to create an executable to test the methods in `staions.c`. Run the executable with `./station`.
-  
+  * type `make station` to create an executable to test the methods in `staions.c`. Run the executable with `./station`.
