@@ -8,3 +8,9 @@ Navigate to the directory you want to clone the project to. Clone the repo using
 ```
 git clone https://github.com/tarhang/TTC_simulation.git
 ```
+
+## Usage
+* `ttc.h` - 
+* `passengers.c` - 
+* `trains.c` - 
+* `stations.c` - 
